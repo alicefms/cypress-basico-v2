@@ -33,5 +33,15 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     it('não permite digitação de valor não numérico no telefone', () => {
         cy.get('#phone').type('teste string').should('be.empty')
     });
+
+    it.only('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', () => {
+        cy.get('#firstName').type('Alice')
+        cy.get('#lastName').type('Souza')
+        cy.get('#email').type('alice@email.com')
+        cy.get('#phone-checkbox').click()
+        cy.get('#open-text-area').type('eita, eita')
+        cy.get('.button').click()
+        cy.get('.error').should('be.visible')
+    });
     
 });
