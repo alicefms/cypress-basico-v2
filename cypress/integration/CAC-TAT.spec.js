@@ -44,11 +44,16 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('.error').should('be.visible')
     });
 
-    it.only('preenche e limpa os campos nome, sobrenome, email e telefone', () => {
+    it('preenche e limpa os campos nome, sobrenome, email e telefone', () => {
         cy.get('#firstName').type('Alice').should('have.value', 'Alice').clear().should('have.value', '')
         cy.get('#lastName').type('Souza').should('have.value', 'Souza').clear().should('have.value', '')
         cy.get('#email').type('alice@email.com').should('have.value', 'alice@email.com').clear().should('have.value', '')
         cy.get('#phone').type('8199999999').should('have.value', '8199999999').clear().should('have.value', '')
+    });
+
+    it.only('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', () => {
+        cy.get('.button').click()
+        cy.get('.error').should('be.visible')
     });
     
 });
