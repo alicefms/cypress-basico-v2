@@ -85,7 +85,11 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('input[type="checkbox"]').last().uncheck().should('not.be.checked')
     });
 
-
+    it('seleciona um arquivo da pasta fixtures', () => {
+        cy.get('#file-upload').should('not.have.value')
+        .selectFile('./cypress/fixtures/example.json').should(($el)=>
+        expect($el[0].files[0].name).to.equal('example.json'))
+    });
 
 
 });
