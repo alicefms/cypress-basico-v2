@@ -30,5 +30,5 @@ Cypress.Commands.add('fillMandatoryFieldsAndSubmit', ()=>{
         cy.get('#email').type('alice@email.com')
         cy.get('#phone').type('8199999999')
         cy.get('#open-text-area').type('preenchimento por comando customizado')
-        cy.get('.button').click()
+        cy.contains('.button', 'Enviar').click()
 } )

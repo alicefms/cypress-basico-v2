@@ -16,7 +16,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('#email').type('alice@email.com')
         cy.get('#phone').type('8199999999')
         cy.get('#open-text-area').type('eita, eita, vamos ver se agora demora menos pra digitar por causa do delay', {"delay": 0})
-        cy.get('.button').click()
+        cy.contains('.button', 'Enviar').click()
         cy.get('.success').should('be.visible')
     });
 
@@ -26,7 +26,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('#email').type('alice@hotmailcom')
         cy.get('#phone').type('8199999999')
         cy.get('#open-text-area').type('eita, eita')
-        cy.get('.button').click()
+        cy.contains('.button', 'Enviar').click()
         cy.get('.error').should('be.visible')
     });
 
@@ -40,7 +40,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('#email').type('alice@email.com')
         cy.get('#phone-checkbox').click()
         cy.get('#open-text-area').type('eita, eita')
-        cy.get('.button').click()
+        cy.contains('.button', 'Enviar').click()
         cy.get('.error').should('be.visible')
     });
 
@@ -52,7 +52,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     });
 
     it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', () => {
-        cy.get('.button').click()
+        cy.contains('.button', 'Enviar').click()
         cy.get('.error').should('be.visible')
     });
 
