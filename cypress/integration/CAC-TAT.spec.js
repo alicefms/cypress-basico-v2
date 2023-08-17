@@ -29,5 +29,9 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('.button').click()
         cy.get('.error').should('be.visible')
     });
+
+    it('não permite digitação de valor não numérico no telefone', () => {
+        cy.get('#phone').type('teste string').should('be.empty')
+    });
     
 });
