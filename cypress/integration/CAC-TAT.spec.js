@@ -98,11 +98,27 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     });
 
 
-it.only('seleciona um arquivo utilizando uma fixture para a qual foi dada um alias', () => {
-    cy.fixture('example.json').as("file")
-    cy.get('#file-upload').should('not.have.value')
-    .selectFile('@file').should(($el)=>
-    expect($el[0].files[0].name).to.equal('example.json'))
+    it('seleciona um arquivo utilizando uma fixture para a qual foi dada um alias', () => {
+        cy.fixture('example.json').as("file")
+        cy.get('#file-upload').should('not.have.value')
+        .selectFile('@file').should(($el)=>
+        expect($el[0].files[0].name).to.equal('example.json'))
+    });
+
+    it('verifica que a política de privacidade abre em outra aba sem a necessidade de um clique', () => {
+        cy.get('a').should(($el) => expect($el[0].attributes[1].value).to.equal('_blank'))
+    });
+
+    it('acessa a página da política de privacidade removendo o target e então clicando no link', () => {
+        cy.get('a').invoke('removeAttr', 'target').click()
+        cy.get('#title').should('have.text', 'CAC TAT - Política de privacidade')
+    });
 });
 
+
+describe('Página da política de privacidade', () => {
+    it.only('testa a página da política de privacidade de forma independente', () => {
+        cy.visit('./src/privacy.html')
+        cy.get('#title').should('have.text', 'CAC TAT - Política de privacidade')
+    });
 });
